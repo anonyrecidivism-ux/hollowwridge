@@ -330,16 +330,57 @@ canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 
   <div class="sec rv">
     <div class="sec-head"><div class="sec-t">состав</div><div class="sec-line"></div></div>
-    <div class="mgrid">
-      <a href="https://t.me/ALPHARDCC" class="mem rc">
-        <div class="mava">A</div>
-        <div><div class="mnick">@ALPHARDCC</div><div class="mrole">владелец</div></div>
+    <!-- БОГ -->
+    <div style="font-size:8px;font-weight:800;letter-spacing:3px;color:#e91e63;text-transform:uppercase;margin-bottom:10px;opacity:0.9">★ бог</div>
+    <a href="https://t.me/recidivismnational" class="mem rc" style="background:linear-gradient(135deg,rgba(233,30,99,0.1),rgba(255,152,0,0.08));border-color:rgba(233,30,99,0.35);margin-bottom:14px">
+      <div class="mava" style="background:linear-gradient(135deg,#e91e63,#ff9800);border:none;color:#fff;font-size:16px">✦</div>
+      <div>
+        <div class="mnick" style="background:linear-gradient(90deg,#e91e63,#ff9800);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">@recidivismnational</div>
+        <div class="mrole" style="color:#e91e63">бог • красавчик чата</div>
+      </div>
+      <div class="mdot" style="background:linear-gradient(135deg,#e91e63,#ff9800);animation:godPulse 1.5s ease-in-out infinite"></div>
+    </a>
+    <style>
+    @keyframes godPulse{
+      0%,100%{box-shadow:0 0 0 0 rgba(233,30,99,0.6);transform:scale(1)}
+      50%{box-shadow:0 0 0 6px rgba(233,30,99,0);transform:scale(1.3)}
+    }
+    </style>
+    <!-- СОЗДАТЕЛИ -->
+    <div style="font-size:8px;font-weight:800;letter-spacing:3px;color:var(--g1);text-transform:uppercase;margin-bottom:10px;opacity:0.7">создатели</div>
+    <div class="mgrid" style="margin-bottom:14px">
+      <a href="https://t.me/feevva27" class="mem rc">
+        <div class="mava">F</div>
+        <div><div class="mnick">@feevva27</div><div class="mrole">создатель</div></div>
         <div class="mdot gold"></div>
       </a>
-      <a href="https://t.me/recidivismnational" class="mem rc">
-        <div class="mava">R</div>
-        <div><div class="mnick">@recidivismnational</div><div class="mrole">красавчик чата</div></div>
-        <div class="mdot"></div>
+      <a href="https://t.me/vqeho" class="mem rc">
+        <div class="mava">V</div>
+        <div><div class="mnick">@vqeho</div><div class="mrole">создатель</div></div>
+        <div class="mdot gold"></div>
+      </a>
+      <a href="https://t.me/ALPHARDCC" class="mem rc">
+        <div class="mava">A</div>
+        <div><div class="mnick">@ALPHARDCC</div><div class="mrole">создатель</div></div>
+        <div class="mdot gold"></div>
+      </a>
+    </div>
+    <!-- СТАРШИЕ АДМИНЫ -->
+    <div style="font-size:8px;font-weight:800;letter-spacing:3px;color:var(--g1);text-transform:uppercase;margin-bottom:10px;opacity:0.7">старшие админы</div>
+    <div class="mgrid" style="margin-bottom:14px">
+      <a href="https://t.me/mvmxlv" class="mem rc">
+        <div class="mava">M</div>
+        <div><div class="mnick">@mvmxlv</div><div class="mrole">старший админ</div></div>
+        <div class="mdot" style="background:#7986cb"></div>
+      </a>
+    </div>
+    <!-- МЛ МОДЕРАТОРЫ -->
+    <div style="font-size:8px;font-weight:800;letter-spacing:3px;color:var(--g1);text-transform:uppercase;margin-bottom:10px;opacity:0.7">младшие модераторы</div>
+    <div class="mgrid">
+      <a href="https://t.me/kurskitanes" class="mem rc">
+        <div class="mava">K</div>
+        <div><div class="mnick">@kurskitanes</div><div class="mrole">мл. модератор</div></div>
+        <div class="mdot" style="background:#a5d6a7"></div>
       </a>
     </div>
   </div>
@@ -366,19 +407,37 @@ canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 </div>
 
 <script>
-/* PARTICLES */
-const cv=document.getElementById('pc'),cx=cv.getContext('2d');let pts=[];
+/* FALLING LEAVES */
+const cv=document.getElementById('pc'),cx=cv.getContext('2d');let leaves=[];
+const leafColors=['#66bb6a','#81c784','#a5d6a7','#43a047','#2e7d32','#c8e6c9'];
+function createLeaf(){
+  return {x:Math.random()*window.innerWidth,y:-20,size:6+Math.random()*12,
+    speedY:0.8+Math.random()*1.5,speedX:(Math.random()-0.5)*0.8,
+    rotation:Math.random()*360,rotSpeed:(Math.random()-0.5)*3,
+    color:leafColors[Math.floor(Math.random()*leafColors.length)],
+    opacity:0.35+Math.random()*0.35,sway:Math.random()*Math.PI*2,swaySpeed:0.02+Math.random()*0.02};
+}
+function drawLeaf(l){
+  cx.save();cx.translate(l.x,l.y);cx.rotate(l.rotation*Math.PI/180);cx.globalAlpha=l.opacity;
+  cx.fillStyle=l.color;cx.beginPath();
+  cx.moveTo(0,-l.size);cx.bezierCurveTo(l.size*.8,-l.size*.5,l.size*.8,l.size*.5,0,l.size);
+  cx.bezierCurveTo(-l.size*.8,l.size*.5,-l.size*.8,-l.size*.5,0,-l.size);cx.fill();
+  cx.strokeStyle='rgba(255,255,255,0.25)';cx.lineWidth=0.7;
+  cx.beginPath();cx.moveTo(0,-l.size);cx.lineTo(0,l.size);cx.stroke();
+  cx.restore();
+}
 function initP(){
-  cv.width=window.innerWidth;cv.height=window.innerHeight;pts=[];
-  for(let i=0;i<18;i++) pts.push({
-    x:Math.random()*cv.width,y:Math.random()*cv.height,
-    vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15,
-    r:1+Math.random()*2,o:.04+Math.random()*.1
-  });
+  cv.width=window.innerWidth;cv.height=window.innerHeight;leaves=[];
+  for(let i=0;i<22;i++){const l=createLeaf();l.y=Math.random()*cv.height;leaves.push(l);}
 }
 function drawP(){
   cx.clearRect(0,0,cv.width,cv.height);
-  pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=cv.width;if(p.x>cv.width)p.x=0;if(p.y<0)p.y=cv.height;if(p.y>cv.height)p.y=0;cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);cx.fillStyle=`rgba(67,160,71,${p.o})`;cx.fill();});
+  leaves.forEach((l,i)=>{
+    l.sway+=l.swaySpeed;l.x+=l.speedX+Math.sin(l.sway)*0.5;
+    l.y+=l.speedY;l.rotation+=l.rotSpeed;
+    if(l.y>cv.height+20)leaves[i]=createLeaf();
+    drawLeaf(l);
+  });
   requestAnimationFrame(drawP);
 }
 window.addEventListener('resize',initP);initP();drawP();
